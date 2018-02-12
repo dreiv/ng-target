@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'ng test --single-run' 
+                sh 'ng test --browsers ChromeHeadless --single-run' 
             }
         }
     }
