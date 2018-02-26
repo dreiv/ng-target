@@ -11,4 +11,3 @@ USER node
 
 ENV CHROME_BIN /usr/bin/chromium-browser
 
-WORKDIR /usr/src/app

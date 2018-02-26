@@ -1,27 +1,46 @@
 pipeline {
     agent {
-        docker {
-            image 'node:alpine' 
-            args '-p 3000:3000' 
+        dockerfile {
+            dir: 'build'
         }
-    }
-    environment {
-        CI = 'true'
     }
     stages {
         stage('Initialize') {
             steps {
-                sh 'npm install && npm update'
+                sh 'npm install'
             }
         }
-        stage('Build') { 
+        stage('Unit Test') {
             steps {
-                sh 'npm build' 
+                echo 'unit testing'
             }
         }
-        stage('Test') {
+        stage('Convergence Testing') {
             steps {
-                sh 'ng test --browsers ChromeHeadless --single-run' 
+                parallel (
+                firefox: {
+                    echo "Firefox Testing"
+                },
+                Chrome: {
+                    echo "Chrome Testing"
+                },
+                IE: {
+                    echo "IE Testing"
+                },
+                Mobile: {
+                    echo "Mobile Testing"
+                }
+                )
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'build'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
             }
         }
     }
