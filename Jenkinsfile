@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Unit Test') {
             steps {
-                echo 'ng test --browser=ChromeHeadlessCI --single-run=true'
+                sh 'ng test --browser=ChromeHeadlessCI --single-run=true'
             }
         }
         stage('Convergence Testing') {
