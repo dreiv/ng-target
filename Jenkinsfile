@@ -2,6 +2,7 @@ pipeline {
     agent {
         dockerfile {
             dir 'build'
+            additionalBuildArgs '-v $HOME/.npm:/root/.npm'
         }
     }
     stages {
