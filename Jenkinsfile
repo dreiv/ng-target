@@ -22,7 +22,7 @@ pipeline {
                     echo "Firefox Testing"
                 },
                 Chrome: {
-                    echo "Chrome Testing"
+                    sh '$(npm bin)/ng e2e'
                 },
                 IE: {
                     echo "IE Testing"
