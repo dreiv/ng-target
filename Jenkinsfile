@@ -1,14 +1,14 @@
 pipeline {
-    agent {
-        dockerfile {
-            dir 'build',
-            label 'base'
-        }
-    }
     stages {
         stage('Initialize') {
+            agent {
+                dockerfile {
+                    dir 'build',
+                    label 'base'
+                }
+            }
             steps {
-                sh 'npm install'
+                echo 'Initialize'
             }
         }
         stage('Unit Test') {
