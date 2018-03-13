@@ -1,10 +1,12 @@
 pipeline {
-    agent docker
+    agent {
+        docker
+    }
     stages {
         stage('Initialize') {
             agent {
                 dockerfile {
-                    dir 'build',
+                    dir 'build'
                     label 'base'
                 }
             }
