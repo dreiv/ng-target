@@ -1,24 +1,23 @@
 pipeline {
-    agent any
+    agent none
     stages {
-        stage('Initialize') {
+        stage('Unit Test') {
             agent {
                 dockerfile {
-                    dir 'build'
-                    label 'base'
+                    additionalBuildArgs  '--target test'
                 }
             }
-            steps {
-                echo 'Initialize'
-            }
-        }
-        stage('Unit Test') {
             steps {
                 echo "unit test"
                 // sh '$(npm bin)/ng test --browser=ChromeHeadlessCI --single-run=true'
             }
         }
         stage('Convergence Testing') {
+            agent {
+                dockerfile {
+                    additionalBuildArgs  '--target test'
+                }
+            }
             steps {
                 parallel (
                 firefox: {
@@ -37,12 +36,8 @@ pipeline {
                 )
             }
         }
-        stage('Build') {
-            steps {
-                echo 'build'
-            }
-        }
         stage('Deploy') {
+            agent any
             steps {
                 echo 'Deploying...'
             }
