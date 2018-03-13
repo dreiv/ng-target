@@ -32,14 +32,3 @@ USER node
 
 ENV CHROME_BIN /usr/bin/chromium-browser
 COPY . .
-
-#
-# ---- Release ----
-FROM base AS release
-# Copy production node_modules
-COPY --from=dependencies /root/app/prod_node_modules ./node_modules
-# Copy app sources
-COPY . .
-# Expose port and define CMD
-EXPOSE 4200
-CMD npm run start

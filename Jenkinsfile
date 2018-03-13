@@ -4,7 +4,7 @@ pipeline {
         stage('Unit Test') {
             agent {
                 dockerfile {
-                    additionalBuildArgs  '--target test'
+                    additionalBuildArgs '--target test'
                 }
             }
             steps {
