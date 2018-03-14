@@ -1,5 +1,5 @@
+try {
 pipeline {
-    try {
     agent none
     stages {
         stage('Unit Test') {
@@ -44,7 +44,7 @@ pipeline {
             }
         }
     }
-    } catch (err) {
+}
+} catch (err) {
         echo "miu miu"
     }
-}
