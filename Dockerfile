@@ -19,8 +19,8 @@ RUN cp -R node_modules prod_node_modules
 RUN npm install
 
 #
-# ---- Test(Chrome) ----
-FROM dependencies as test
+# ---- Chrome Headless ----
+FROM dependencies as chromeHeadless
 RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories \
   && apk add --no-cache \
   # Chromium dependencies
@@ -35,9 +35,7 @@ COPY . .
 
 #
 # ---- Release ----
-FROM node:alpine AS release
-# Set working directory
-WORKDIR /root/app
+FROM base AS release
 # Copy production node_modules
 COPY --from=dependencies /root/app/prod_node_modules ./node_modules
 # Copy app sources
